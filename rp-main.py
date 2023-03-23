@@ -1,7 +1,13 @@
 import streamlit as st
 import random
+import requests
 
 st.title('random picture')
+
+def get_pic(url):
+    r = requests.get(url, timeout=5)
+    return r.content
+
 
 pic_dir_num = random.randint(0, 1)
 if pic_dir_num == 0:
@@ -12,5 +18,5 @@ else:
     pic_url = "https://github.com/aaron-lii/random-pic/raw/main/gifs/" + str(pic_num) + ".gif"
 
 
-st.image(pic_url)
+st.image(get_pic(pic_url))
 
